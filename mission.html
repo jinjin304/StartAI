@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>每日任务 - 星际工厂</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: url("https://images.unsplash.com/photo-1535223289827-42f1e9919769")
+                no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Orbitron', Arial;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 34px;
+            text-shadow: 0 0 12px cyan;
+        }
+
+        .task-box {
+            width: 80%;
+            margin: auto;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 15px;
+            border:1px solid cyan;
+            box-shadow:0 0 15px cyan;
+        }
+
+        .task {
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid cyan;
+            border-radius: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background: linear-gradient(90deg, #0077ff, #00eaff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            box-shadow:0 0 10px cyan;
+        }
+
+        button:hover {
+            transform: scale(1.04);
+        }
+
+        .back-btn {
+            text-align:center;
+            margin-top:40px;
+        }
+    </style>
+
+    <script>
+        let coins = parseFloat(localStorage.getItem("coins")) || 0;
+        let robots = JSON.parse(localStorage.getItem("robots")) || { A:{count:0}, B:{count:0} };
+        let playerLevel = parseFloat(localStorage.getItem("playerLevel")) || 1;
+
+        function save(){
+            localStorage.setItem("coins", coins);
+        }

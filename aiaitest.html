@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>星际AI工厂 - Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa");
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+        }
+
+        .content {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .btn-enter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(to right, #4c8cff, #a67bff);
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-enter:hover {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+
+    <div class="content">
+        <h1>星际AI工厂 · Demo</h1>
+        <p>科技太空城市 · 购买AI机器人 · 产生USDT收益 · 全自动AI经济体系</p>
+    </div>
+
+    <div class="btn-enter" onclick="enterGame()">进入游戏</div>
+
+    <script>
+        function enterGame() {
+            // 确保文件存在于同一目录 /game.html
+            window.location.href = "game.html";
+        }
+    </script>
+</body

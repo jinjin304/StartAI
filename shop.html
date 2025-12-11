@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>商店 - 星际AI工厂</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")
+                no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Orbitron', Arial;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            text-shadow: 0 0 10px cyan;
+        }
+
+        .shop-container {
+            width: 80%;
+            margin: auto;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+            gap: 25px;
+        }
+
+        .item {
+            padding: 20px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 12px;
+            border:1px solid cyan;
+            box-shadow:0 0 15px cyan;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background: linear-gradient(90deg, #0077ff, #00eaff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .back {
+            text-align:center;
+            margin-top:40px;
+        }
+    </style>
+
+    <script>
+        let coins = parseFloat(localStorage.getItem("coins")) || 0;
+        let robots = JSON.parse(localStorage.getItem("robots")) || { A:{count:0}, B:{count:0} };
+
+        function buyRobot(type, cost){
+            if(coins < cost){ alert("USDT 不足！"); return; }
+
+            coins -= cost;
+            robots[type].count++;
+            localStorage.setItem("coins", coins);
+            localStorage.setItem("robots", JSON.stringify(robots));
+            alert("购买成功！");
+        }
+
+        function buyBoost(){
+            if(coins < 100){ alert("USDT 不足！"); return; }
+
+            coins -= 100;
+            localStorage.setItem("coins", coins);
+
+            let expireTime = Date.now() + (60*60*1000); // 1 hour
+            localStorage.setItem("boostExpire", expireTime);
+
+            alert("2×加速已激活（1小时）！");
+        }
+    </script>
+
+</head>
+
+<body>
+
+<h1>🛒 商店</h1>
+
+<div class="shop-container">

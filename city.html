@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>星际 AI 城市 – Cyberpunk 霓虹版</title>
+    <link rel="stylesheet" href="css/city.css">
+</head>
+
+<body>
+
+<div class="city-container">
+
+    <h1 class="city-title">⚡ 星际 AI 主基地</h1>
+    <p class="city-sub">霓虹 Cyberpunk 科技城市</p>
+
+    <div class="building-grid">
+
+        <div class="building neon-box" onclick="go('factory')">
+            🏭 工厂
+        </div>
+
+        <div class="building neon-box" onclick="go('space')">
+            🛰 航天中心
+        </div>
+
+        <div class="building neon-box" onclick="go('lab')">
+            🧪 研究所
+        </div>
+
+        <div class="building neon-box" onclick="go('mission')">
+            📈 任务中心
+        </div>
+
+        <div class="building neon-box" onclick="go('shop')">
+            🛒 商店
+        </div>
+
+        <div class="building neon-box" onclick="go('invite')">
+            👥 邀请好友
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function go(where) {
+    if (where === "shop") window.location.href = "shop.html";
+    if (where === "mission") window.location.href = "mission.html";
+    if (where === "invite") window.location.href = "invite.html";
+
+    // 暂时给还没做的建筑加提示
+    if (where === "factory") alert("工厂功能开发中…");
+    if (where === "space") alert("航天中心功能开发中…");
+    if (where === "lab") alert("研究所功能开发中…");
+}
+</script>
+
+</body>
+</html>

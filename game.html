@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>星际AI工厂 - 游戏大厅</title>
+
+    <script src="js/storage.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background: url('https://images.unsplash.com/photo-1526403229873-2c7d04091ef5') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Orbitron', Arial;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0px 0px 10px #00eaff;
+        }
+
+        .top-panel {
+            text-align:center;
+            margin-top:10px;
+        }
+
+        .info-box {
+            font-size:20px;
+            background:rgba(0,0,0,0.5);
+            padding:10px 20px;
+            border-radius:10px;
+            display:inline-block;
+            border:1px solid rgba(0,255,255,0.3);
+        }
+
+        .robot-container {
+            margin-top:40px;
+            display:flex;
+            justify-content:center;
+            gap:25px;
+        }
+
+        .robot-card {
+            width:240px;
+            padding:20px;
+            border-radius:15px;
+            background:rgba(0, 0, 0, 0.55);
+            border:1px solid rgba(0,255,255,0.3);
+            box-shadow:0 0 15px rgba(0,255,255,0.3);
+            backdrop-filter:blur(10px);
+        }
+
+        .robot-card h3 {
+            margin-bottom:5px;
+            color:#00eaff;
+            text-shadow:0 0 6px #00eaff;
+        }
+
+        .city-btn {
+            margin-top:25px;
+            text-align:center;
+        }
+
+        button {
+            margin-top:10px;
+            padding:12px 20px;
+            width:100%;
+            background:linear-gradient(90deg, #0077ff, #00eaff);
+            border:none;
+            border-radius:10px;
+            color:white;
+            cursor:pointer;
+            font-size:16px;
+            font-weight:bold;
+            box-shadow:0 0 10px #00eaff;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00eaff;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>🌌 星际 AI 工厂</header>
+
+<div class="top-panel">
+    <div class="info-box">
+        等级：<span id="playerLevel">1</span> |
+        USDT：<span id="coins">0</span>
+    </div>
+</div>
+
+<div class="robot-container">
+    
+    <div class="robot-card">
+        <h3>机器人 A</h3>
+        <div>等级：<span id="lvlA">1</span></div>
+        <p>基础产量：1 USDT/秒</p>
+        <button onclick="buyRobot('A')">购买机器人（50 USDT）</button>
+        <button onclick="upgradeRobot('A')">升级（20 USDT）</button>
+    </div>
+
+    <div class="robot-card">
+        <h3>机器人 B</h3>
+        <div>等级：<span id="lvlB">1</span></div>
+        <p>基础产量：5 USDT/秒</p>
+        <button onclick="buyRobot('B')">购买机器人（200 USDT）</button>
+        <button onclick="upgradeRobot('B')">升级（50 USDT）</button>
+    </div>
+
+</div>
+
+<div class="city-btn">
+    <button onclick="location.href='city.html'">进入科幻城市基地</button>
+</div>
+
+
+<script>
+    let coins = 0;
+    let playerLevel = 1;
+    let robots = {};
+
+    loadAll();
+    updateUI();
+
+    function updateUI(){
+        document.getElementById("coins").innerText = coins.toFixed(2);
+        document.getElementById("playerLevel").innerText = playerLevel;
+        document.getElementById("lvlA").innerText = robots.A.level;
+        document.getElementById("lvlB").innerText = robots.B.level;
+    }
+
+    function buyRobot(type){
+        let price = type === 'A' ? 50 : 200;
+
+        if(coins >= price){
+            coins -= price;
+            robots[type].count += 1;
+            saveAll();
+            updateUI();
+        }
+    }
+
+    function upgradeRobot(type){
+        let upgradeCost = type === 'A' ? 20 : 50;
+
+        if(coins >= upgradeCost){
+            coins -= upgradeCost;
+            robots[type].level += 1;
+            saveAll();
+            updateUI();
+        }
+    }
+
+    function totalProduction(){
+        let A = robots.A.count * robots.A.base * robots.A.level;
+        let B = robots.B.count * robots.B.base * robots.B.level;
+        return A + B;
+    }
+
+    function levelUpCheck(){
+        if(coins >= 500 && playerLevel < 2) playerLevel = 2;
+        if(coins >= 5000 && playerLevel < 3) playerLevel = 3;
+        if(coins >= 30000 && playerLevel < 4) playerLevel = 4;
+        if(coins >= 100000 && playerLevel < 5) playerLevel = 5;
+        saveAll();
+    }
+
+    setInterval(() => {
+        coins += totalProduction();
+        levelUpCheck();
+        updateUI();
+    }, 1000);
+
+</script>
+
+</body>
+</html>

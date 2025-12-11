@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请好友</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: url("https://images.unsplash.com/photo-1526738549149-8e07eca6c147")
+                no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Orbitron', Arial;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            text-shadow: 0 0 10px cyan;
+        }
+
+        .box {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            background: rgba(0,0,0,0.55);
+            padding: 20px;
+            border:1px solid cyan;
+            border-radius: 12px;
+            box-shadow:0 0 15px cyan;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: linear-gradient(90deg,#0077ff,#00eaff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(1.04);
+        }
+
+        .back {
+            text-align:center;
+            margin-top:40px;
+        }
+    </style>
+
+    <script>
+        let inviteLink = window.location.origin + "/?ref=" + Math.random().toString(36).substring(2);
+
+        function copyLink(){
+            navigator.clipboard.writeText(inviteLink);
+            alert("已复制邀请链接！");
+        }
+    </script>
+
+</head>
+
+<body>
+
+<h1>👥 邀请好友</h1>
+
+<div class="box">
+    <h3>你的专属邀请链接：</h3>
+    <p id="link" style="word-break:break-all;">(自动生成中)</p>
+    <button onclick="copyLink()">复制链接</button>
+</div>
+
+<script>
+    document.getElementById("link").innerText = inviteLink;
+</script>
+
+<div class="back">
+    <button onclick="location.href='city.html'">返回城市基地</button>
+</div>
+
+</body>
+</html>
